@@ -8,6 +8,7 @@ A simple, intuitive task management application built with Next.js, TypeScript, 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Components and Structure](#components-and-structure)
+- [Dockerization](#dockerization)
 - [Screenshots](#screenshots)
 
 ## Features
@@ -43,6 +44,20 @@ A simple, intuitive task management application built with Next.js, TypeScript, 
 - **TaskDetails**: A dedicated page that shows detailed information about a task.
 - **Filter**: A reusable component for filtering tasks by different criteria.
 - **Toast**: Displays notifications for actions like adding or deleting tasks.
+
+## Dockerization
+
+1. **Ensure Docker is installed:** Download Docker from [Docker’s website](https://www.docker.com/) if it’s not installed.
+
+2. Build the Docker image:
+
+```bash
+docker-compose up --build
+```
+
+3. Open your browser and navigate to http://localhost:3000 to access the app.
+
+> This setup will run Taskati in a Docker container using the production build. Rebuild the Docker image after any source code updates.
 
 ## Screenshots
 
