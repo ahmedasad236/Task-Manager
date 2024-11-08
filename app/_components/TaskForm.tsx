@@ -19,6 +19,9 @@ export default function TaskForm({ initialData, onSubmit }: TaskFormProps) {
       priority,
       status: initialData?.status || 'not finished'
     });
+    setTitle('');
+    setDescription('');
+    setPriority('normal');
   };
   return (
     <form

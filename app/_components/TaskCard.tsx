@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { FiCheck, FiEdit, FiTrash, FiX } from 'react-icons/fi';
+
 import Modal from '@/app/_components/Modal';
 import TaskForm from '@/app/_components/TaskForm';
 import { useTaskContext } from '@/app/_contexts/TaskContext';
@@ -26,10 +27,32 @@ const TaskCard = ({ task }: TaskCardProps) => {
     closeDeleteModal();
   };
 
+  const markAsFinished = () => {
+    updateTask(task.id, { ...task, status: 'finished' });
+  };
+
+  const markAsNotFinished = () => {
+    updateTask(task.id, { ...task, status: 'not finished' });
+  };
   return (
     <div className="p-4 border rounded-lg shadow-lg bg-white relative">
       {/* Delete and Edit Icons */}
       <div className="absolute top-2 right-2 flex space-x-2">
+        {task.status === 'not finished' ? (
+          <button
+            onClick={markAsFinished}
+            title="Mark as Finished"
+          >
+            <FiCheck className="w-5 h-4 text-green-500" />
+          </button>
+        ) : (
+          <button
+            onClick={markAsNotFinished}
+            title="Mark as Finished"
+          >
+            <FiX className="w-5 h-4 text-red-500" />
+          </button>
+        )}
         <button onClick={openEditModal}>
           <FiEdit className="w-5 h-5 text-blue-500" />
         </button>
