@@ -1,13 +1,6 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-  priority: 'high' | 'normal' | 'low';
-  status: 'finished' | 'not finished';
-};
+import Toast from '../_components/Toast';
 
 type TaskContextType = {
   tasks: Task[];
@@ -29,6 +22,10 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [toast, setToast] = useState<{
+    message: string;
+    error?: boolean;
+  } | null>(null);
 
   useEffect(() => {
     const storedTasks = localStorage.getItem('tasks');
@@ -39,17 +36,57 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (task: Task) => setTasks([...tasks, task]);
+  const showToast = (message: string, error: boolean) => {
+    setToast({ message, error });
+    setTimeout(() => setToast(null), 3000); // Hide toast after 3 seconds
+  };
 
-  const updateTask = (id: string, updatedTask: Task) =>
+  const addTask = (task: Task) => {
+    // check if there is a task with the same title
+    const taskExists = tasks.find((t) => t.title === task.title);
+    if (taskExists) {
+      showToast('Task with the same title already exists!', true);
+      return;
+    }
+
+    setTasks([...tasks, task]);
+    showToast('Task created successfully!', false);
+  };
+
+  const updateTask = (id: string, updatedTask: Task) => {
+    // check if there is a task with the same title
+    const task = tasks.find((t) => t.id === id);
+    if (!task) {
+      showToast('Task not found!', true);
+      return;
+    }
+
     setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)));
+    showToast('Task updated successfully!', false);
+  };
 
-  const deleteTask = (id: string) =>
+  const deleteTask = (id: string) => {
+    // check if there is a task with the same title
+    const task = tasks.find((t) => t.id === id);
+    if (!task) {
+      showToast('Task not found!', true);
+      return;
+    }
+
     setTasks(tasks.filter((task) => task.id !== id));
+    showToast('Task deleted successfully!', false);
+  };
 
   return (
     <TaskContext.Provider value={{ tasks, addTask, updateTask, deleteTask }}>
       {children}
+      {toast && (
+        <Toast
+          message={toast.message}
+          error={toast.error || false}
+          onClose={() => setToast(null)}
+        />
+      )}
     </TaskContext.Provider>
   );
 };
