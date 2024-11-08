@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Taskati
 
-## Getting Started
+A simple, intuitive task management application built with Next.js, TypeScript, and Tailwind CSS, allowing users to create, view, and manage tasks with filters and a detailed task view.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components and Structure](#components-and-structure)
+- [Screenshots](#screenshots)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Create, update, and delete tasks
+- Filter tasks by priority and status
+- Detailed view for each task
+- Data persistence using `localStorage`
+- Responsive design for mobile and desktop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/task-manager-app.git
+   ```
+2. cd task-manager-app
 
-To learn more about Next.js, take a look at the following resources:
+3. npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Usage
 
-## Deploy on Vercel
+- **Adding Tasks**: Click the "Add Task" button on the main page to create a new task.
+- **Filtering Tasks**: Use the filters for status and priority to organize tasks effectively.
+- **Task Details**: Click on a task to view detailed information and manage it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Components and Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **TaskProvider**: Provides global state management for tasks, handles `localStorage` persistence.
+- **TaskCard**: Displays task details on the main page with options to edit or delete.
+- **TaskDetails**: A dedicated page that shows detailed information about a task.
+- **Filter**: A reusable component for filtering tasks by different criteria.
+- **Toast**: Displays notifications for actions like adding or deleting tasks.
+
+## Screenshots
+
+### Main Page
+
+![Main Page](./screenshots/main-page.png)
+
+### Create Task
+
+![Create Task](./screenshots/create-task.png)
+
+### Tasks Page
+
+![Tasks Page](./screenshots/tasks.png)
+
+### Filters
+
+![Filters](./screenshots/filters.png)
